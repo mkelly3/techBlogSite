@@ -72,3 +72,10 @@ router.get('/edit:id', withAuth, async(req, res) => {
         res.status(500).json(err);
       } 
 });
+
+//routing user to sign in page 
+router.get('/new', (req, res) => {
+    res.render('new-post');
+});
+
+module.expors = router;
