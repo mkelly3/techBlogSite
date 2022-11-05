@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+//finding all posts 
 router.get('/',async(req,res)=> {
     try {
         const dbPostData = await Post.findAll({
@@ -34,6 +35,40 @@ router.get('/',async(req,res)=> {
         });
         //data is displayed newest to oldest 
         res.json(dbPostData.reverse())
+    }catch (err) {
+        console.log(err);
+        res.status(500).json(err)
+    }
+});
+
+//find one post by a specific id
+
+router.get('/:id',async(req,res)=> {
+    try{
+        const dbPostData = await Post.findByPk(req.params.id, {
+            //all of the attributes for the post incluind id, content, title, time created
+            attributes: [
+                'id',
+                'content',
+                'title',
+                'created_at'
+            ],
+            //including the comments and users for the post 
+            include: [{
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    });
+    res.json(dbPostData);
     }catch (err) {
         console.log(err);
         res.status(500).json(err)
