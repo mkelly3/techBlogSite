@@ -89,7 +89,42 @@ router.get('/post/:id', async(req,res) =>{
 
 //redirecting the user to see all of their posts with comments
 
-
+router.get('/post-comment', async (req,res) =>{
+    try {
+        const dbPostData = await Post.findByPk(req.params.id, {
+            //all of the attributes for the post incluind id, content, title, time created
+            attributes: [
+                'id',
+                'content',
+                'title',
+                'created_at'
+            ],
+            //including the comments and users for the post 
+            include: [{
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+        });
+        //rendering the post to the psot page and making sure the user is logged in
+        const posts = dbPostData.get({plain:true});
+        res.render('post-comments', {
+            posts,
+            loggedIn: req.session.loggedIn
+        });
+    }catch (err) {
+        console.log(err);
+        res.status(500).json(err)
+    }
+})
 
 //route to login 
 router.get('/login', (req, res) => {
