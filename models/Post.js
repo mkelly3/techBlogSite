@@ -1,8 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+//create a Post in model
 class Post extends Model {}
 
+//define columns and rows in post 
 Post.init({
     id: {
         type: DataTypes.INTEGER,
