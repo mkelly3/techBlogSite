@@ -74,3 +74,23 @@ router.get('/:id',async(req,res)=> {
         res.status(500).json(err)
     }
 });
+
+//creating a new post
+router.post('/',withAuth, async(req,res) =>{
+    try {
+        const dbPostData = await Post.create({
+            title: req.body.title,
+            content: req.body.content,
+            user_id: req.session.user_id
+        });
+        res.json(dbPostData);
+    }catch (err) {
+        console.log(err);
+        res.status(500).json(err)
+    }
+
+});
+
+//updating a post
+
+//deleting a post
