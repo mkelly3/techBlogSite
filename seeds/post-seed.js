@@ -1,4 +1,5 @@
 const {Post} = require('../models');
+const sequelize = require('../config/connection');
 
 const postData = [
     {

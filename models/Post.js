@@ -1,13 +1,14 @@
+// module.exports = Post;
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-//create a Post in model
+// create our Post model
 class Post extends Model {}
 
-//define columns and rows in post 
-// Post columsn and rows will have information about the id, title, content, user Id and the user id is the foregin key in post
-Post.init({
-    id: {
+// create fields/columns for Post model
+Post.init(
+    {
+      id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
