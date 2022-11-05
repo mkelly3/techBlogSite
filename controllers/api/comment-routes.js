@@ -33,7 +33,7 @@ router.get('/:id', async (req,res) => {
 //need to be logged in in order to add, update or delte comments 
 // creating a comment
 
-router.post('/'.withAuth, async(req,res)=>{
+router.post('/',withAuth, async(req,res)=>{
     try{
         const dbCommentData = await Comment.create({
             comment_text: req.body.comment_text,
@@ -48,6 +48,22 @@ router.post('/'.withAuth, async(req,res)=>{
 });
 
 //editing a comment that has already been created
+
+router.put('/:id', withAuth, async(req,res) => {
+    try{
+        const dbCommentData = await Comment.update({
+            comment_text: req.body.comment_text
+        }, {
+            where: {
+                id: req.params.id
+            }
+    })
+    res.json(dbCommentData);
+    }catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 
 //deleting a comment 
 
