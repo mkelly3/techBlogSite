@@ -17,8 +17,8 @@ Comment.init({
       comment_text: {
         type: DataTypes.STRING,
         validate: {
-            //the comment must be at least 10 characters long
-            len: [10]
+            //the comment must be at least 6 characters long
+            len: [6]
         }
       },
       user_id: {
