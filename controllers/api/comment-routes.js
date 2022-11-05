@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../models');
-const withAuth = require('../utils/auth');
+const { Post, User, Comment } = require('../../models');
+const withAuth = require('../../utils/auth')
 
 //getting all comments
 //don't need to be logged in to view the comments  
@@ -75,8 +75,7 @@ router.delete('/:id', withAuth, async(req,res) => {
         res.json(dbCommentData);
     }catch (err) {
         console.log(err);
-    }
-       
+    }      
 });
 
 
