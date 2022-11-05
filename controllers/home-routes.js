@@ -47,6 +47,48 @@ router.get('/', async (req,res) => {
     }
 });
 
+//get one blog post
+
+router.get('/post/:id', async(req,res) =>{
+    try {
+        //finding a single post by the id
+        const dbPostData = await Post.findByPk(req.params.id, {
+            //all of the attributes for the post incluind id, content, title, time created
+            attributes: [
+                'id',
+                'content',
+                'title',
+                'created_at'
+            ],
+            //including the comments and users for the post 
+            include: [{
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+        });
+        //rendering the post to the psot page and making sure the user is logged in
+        const posts = dbPostData.get({plain:true});
+        res.render('post', {
+            posts,
+            loggedIn: req.session.loggedIn
+        });
+    }catch (err) {
+        console.log(err);
+        res.status(500).json(err)
+    }
+});
+
+//redirecting the user to see all of their posts with comments
+
 
 
 //route to login 
