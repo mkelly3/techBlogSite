@@ -5,6 +5,7 @@ const sequelize = require('../config/connection');
 class Post extends Model {}
 
 //define columns and rows in post 
+// Post columsn and rows will have information about the id, title, content, user Id and the user id is the foregin key in post
 Post.init({
     id: {
         type: DataTypes.INTEGER,
