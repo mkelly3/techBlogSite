@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { config } = require('dotenv');
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
@@ -66,6 +67,19 @@ router.put('/:id', withAuth, async(req,res) => {
 });
 
 //deleting a comment 
+router.delete('/:id', withAuth, async(req,res) => {
+    try {
+        const dbCommentData = await Comment.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.json(dbCommentData);
+    }catch (err) {
+        console.log(err);
+    }
+       
+});
 
 
 module.exports = router;
