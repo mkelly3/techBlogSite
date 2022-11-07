@@ -4,11 +4,10 @@ const { Post, User, Comment} = require('../../models');
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
-// GET all posts
+// Get all posts
 router.get('/', (req, res) => {
     console.log('======================');
     Post.findAll({
-      // Query configuration
         attributes: ['id', 
                     'title',
                     'content',
@@ -38,7 +37,7 @@ router.get('/', (req, res) => {
   
 });
 
-// GET a single post 
+// Get a single post by an id
 router.get('/:id', (req, res) => {
     Post.findOne({
       where: {

@@ -60,9 +60,7 @@ router.get('/:id', (req, res) => {
       });
 });
 
-// POST /api/users - similar to INSERT INTO users / VALUES 
 router.post('/', (req, res) => {
-    // expects {username: 'Lernantino', password: 'password1234'}
     User.create({
         username: req.body.username,
         password: req.body.password
@@ -86,7 +84,7 @@ router.post('/', (req, res) => {
 
 // POST to identify users 
 router.post('/login', (req, res) => {
-    // expects {username: 'lernantino', password: 'password1234'}
+  
     User.findOne({
         where: {
             username: req.body.username
@@ -96,8 +94,6 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'No user with that username!'});
             return;
         }
-        // res.json({ user: dbUserData});
-        // verify user
         const validPassword = dbUserData.checkPassword(req.body.password);
 
         if (!validPassword) {
@@ -105,7 +101,6 @@ router.post('/login', (req, res) => {
             return;
         }
         req.session.save(() => {
-            // declare session variables
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
@@ -119,8 +114,6 @@ router.post('/login', (req, res) => {
       });
 });
 
-
-// users to log out 
 router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
@@ -130,11 +123,8 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
-
-// PUT /api/users/1 - similar to UPDATE 
 router.put('/:id', (req, res) => {
-    // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
-
+    
     User.update(req.body, {
         individualHooks: true,
         where: {

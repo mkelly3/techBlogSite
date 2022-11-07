@@ -13,20 +13,6 @@ router.get('/', (req, res) => {
         })
 });
 
-//route to get 1 comment
-router.get('/:id', (req, res) => {
-    Comment.findAll({
-            where: { 
-                id: req.params.id}
-        })
-        .then(dbCommentData => res.json(dbCommentData))
-        .catch(err => {
-            console.log(err); 
-            res.status(500).json(err); 
-        })
-});
-
-
 //route to create a comment
 router.post('/', withAuth, (req, res) => {
     // check session
