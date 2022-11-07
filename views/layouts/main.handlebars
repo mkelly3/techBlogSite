@@ -9,23 +9,23 @@
 </head>
 
 <body>
-  <div class="wrapper">
-      <header class="hero">
-          <div>
-            <nav class"nav">
-                    <a class="link" href="/">home</a>
-                    <a class="link" href="/dashboard">dashboard</a>
-                    {{#if loggedIn}}
-                    <a class="link" href="/" id="logout">logout</a>
-                    {{else}}
-                    <a class="link" href="/login">login</a>
-                    {{/if}}
-                </nav>          
+  <div class="container">
+      <header class="header">
+        <div class = "page-title-container">
+          <h1><i class="page-title"></i>Tech Blog</h1>
           </div>
-
-          <h1 class="app-title"><i class="fab "></i>Tech Blog</h1>
+          <nav class="nav">
+            <a class="link" href="/">HOME</a>
+            <a class="link" href="/dashboard">DASHBOARD</a>
+            {{#if loggedIn}}
+            <a class="link" href="/" id="logout">logout</a>
+            {{else}}
+            <a class="link" href="/login">LOGIN</a>
+            {{/if}}
+          </nav>          
+        
       </header>
-
+  <br/>
     <main>
       {{{ body }}}
     </main>
