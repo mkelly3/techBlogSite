@@ -72,6 +72,10 @@ nav a {
   text-align: center;
 }
 
+.postContainer{
+  margin: 10px;
+}
+
 nav a:hover {
   color: var(--secondary);
   background-color: var(--dark);
@@ -129,11 +133,9 @@ display: inline;
   color: var(--blue);
 }
 
-/* HEADER */
-
 .header {
   margin: 1px;
-    top: 0;
+  top: 0;
   width: 100%;
   position: fixed;
   height: fit-content;
@@ -240,8 +242,6 @@ h4 {
     padding: 1%;
     font-size: 110%;
   }
-  
-  /* INPUTS */
   
   .form-label,
   .form-input,
