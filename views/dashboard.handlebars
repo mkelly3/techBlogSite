@@ -1,6 +1,9 @@
 
 {{#if posts.length}}
 <section>
+  <hr/>
+  <hr/>
+  <hr/>
   <h2 class="header-page">Your Posts</h2>
     {{#each posts as |post|}}
         {{> dashboard-postinfo post}}
@@ -9,7 +12,6 @@
 </section>
 {{/if}}
 <div class="postContainer">
-  <br/>
 <button type="submit" class="btn"><a class="link-button" href="/dashboard/new"> Add New Post</a></button>
 </div>
 

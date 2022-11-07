@@ -65,6 +65,11 @@ nav {
   display: flex;
 }
 
+article{
+  padding:30px;
+  margin-top: 10px;
+}
+
 nav a {
   color: var(--light);
   padding: 14px 20px;
@@ -74,6 +79,7 @@ nav a {
 
 .postContainer{
   margin: 10px;
+  padding: 20px;
 }
 
 nav a:hover {
